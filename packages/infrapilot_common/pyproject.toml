@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infrapilot-common"
+version = "0.1.0"
+description = "InfraPilot shared library (config, logging, GCP auth helpers)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "InfraPilot" }]
+dependencies = [
+  "pydantic>=2.7.0",
+  "PyYAML>=6.0.1",
+  "google-auth>=2.30.0",
+  "requests>=2.31.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infrapilot_common"]

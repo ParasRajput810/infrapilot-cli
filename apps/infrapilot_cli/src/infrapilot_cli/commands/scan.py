@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 from uuid import uuid4
+from google.auth.exceptions import DefaultCredentialsError
+from infrapilot_common.clients.gcp_auth import assert_adc_works
 
 import typer
 from rich.console import Console
@@ -84,6 +86,9 @@ def run(
         validate_project_id(effective_project)
         _ensure_output_dir(effective_output_dir)
 
+        adc_info = assert_adc_works(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        logger.info("adc_ok", extra={"adc": adc_info.__dict__})
+
         scan_id = f"scan_{uuid4().hex[:12]}"
         set_scan_id(scan_id)
 
@@ -128,3 +133,8 @@ def run(
         logger.error("scan_failed_unexpected", extra={"error": str(e)}, exc_info=True)
         console.print("[red]ERROR:[/red] Unexpected error. Re-run with --log-level DEBUG for details.")
         raise typer.Exit(code=1)
+    except DefaultCredentialsError as e:
+        logger.error("adc_missing", extra={"error": str(e)}, exc_info=True)
+        console.print("[red]ERROR:[/red] GCP Application Default Credentials not found or invalid.")
+        console.print("Fix: run [bold]gcloud auth application-default login[/bold]")
+        raise typer.Exit(code=2)
