@@ -1,0 +1,72 @@
+# InfraPilot (current state: Python CLI + common pkg + local outputs + Docker)
+
+# -------------------------
+# Python / virtualenv
+# -------------------------
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -------------------------
+# Packaging / build artifacts
+# -------------------------
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# -------------------------
+# Test / coverage
+# -------------------------
+.coverage
+coverage.xml
+htmlcov/
+
+# -------------------------
+# IDE / editor
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# -------------------------
+# InfraPilot outputs
+# -------------------------
+out/
+out2/
+out_tmp/
+
+# If you want to keep the folder but ignore contents:
+# out/*
+# !out/.gitkeep
+
+# -------------------------
+# Config files (local)
+# -------------------------
+# Ignore local config if it contains real project IDs or paths.
+# Comment this out if you want to commit a sample infrapilot.yaml.
+infrapilot.yaml
+
+# -------------------------
+# Google Cloud / credentials
+# -------------------------
+**/application_default_credentials.json
+**/*service-account*.json
+**/*.pem
+
+# -------------------------
+# Docker
+# -------------------------
+*.log
+docker-compose.override.yml

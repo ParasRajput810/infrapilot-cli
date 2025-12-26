@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infrapilot-cli"
+version = "0.1.0"
+description = "InfraPilot CLI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "typer>=0.12.3",
+  "rich>=13.8.1",
+  "pydantic>=2.7.0",
+  "PyYAML>=6.0.1",
+]
+
+[project.scripts]
+infrapilot = "infrapilot_cli.main:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infrapilot_cli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

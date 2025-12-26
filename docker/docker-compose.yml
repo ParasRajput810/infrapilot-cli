@@ -1,0 +1,11 @@
+services:
+  infrapilot-cli:
+    build:
+      context: ..
+      dockerfile: apps/infrapilot_cli/Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+      - ../out:/workspace/out
+    environment:
+      - PYTHONUNBUFFERED=1
